@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procalc</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="body">
+    <canvas id="starCanvas"></canvas>
+
+    <div class="background">
+    <h1 class="title" aria-label="Procalc">
+        <span class="pro">Pro</span><span class="calc">calc</span>
+    </h1>
+    <p class="made-by">made by <span>Lucas Santos</span></p>
+</div>
+
+    <div id="mouseGlow"></div>
+
+    <div class="Calculator" id="calculatorCard">
+
+        <p id="Result"></p>
+
+
+
+        <table>
+            <tr>
+                <td><button class="button" onclick="apagar()">⌫</button></td>
+                <td><button class="button" onclick="limpar()">AC</button></td>
+                <td><button class="button" onclick="porcentagem()">%</button></td>
+                <td><button class="button" onclick="insert('/')">÷</button></td>
+            </tr>
+
+            <tr>
+                <td><button class="button" onclick="insert('7')">7</button></td>
+                <td><button class="button" onclick="insert('8')">8</button></td>
+                <td><button class="button" onclick="insert('9')">9</button></td>
+                <td><button class="button" onclick="insert('*')">X</button></td>
+            </tr>
+
+            <tr>
+                <td><button class="button" onclick="insert('4')">4</button></td>
+                <td><button class="button" onclick="insert('5')">5</button></td>
+                <td><button class="button" onclick="insert('6')">6</button></td>
+                <td><button class="button" onclick="insert('-')">-</button></td>
+            </tr>
+
+            <tr>
+                <td><button class="button" onclick="insert('1')">1</button></td>
+                <td><button class="button" onclick="insert('2')">2</button></td>
+                <td><button class="button" onclick="insert('3')">3</button></td>
+                <td><button class="button" onclick="insert('+')">+</button></td>
+            </tr>
+
+            <tr>
+                <td><button class="button" onclick="trocarSinal()">∓</button></td>
+                <td colspan="2">
+                    <button class="button" style="width: 110px;" onclick="insert('0')">0</button>
+                </td>
+                <td><button class="button" onclick="insert(',')">,</button></td>
+            </tr>
+
+            <tr>
+                <td colspan="4">
+                    <button class="button" style="width: 240px;" onclick="calcular()">=</button>
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
+    <script>
+        function insert(num)
+{
+    var resultado = document.getElementById('Result');
+
+    if(resultado.innerHTML == "Erro")
+    {
+        resultado.innerHTML = "";
+    }
+
+    resultado.innerHTML += num;
+}
+        function porcentagem()
+{
+    let resultado = document.getElementById('Result');
+
+    let numero = resultado.innerHTML.replace(/,/g, ".");
+
+    try {
+        resultado.innerHTML = (Number(numero) / 100)
+            .toString()
+            .replace(".", ",");
+    } catch {
+        resultado.innerHTML = "Erro";
+    }
+}
+            function limpar() {
+            document.getElementById('Result').innerHTML = "";
+        }
+            function apagar() {
+            document.getElementById('Result').innerHTML =
+            document.getElementById('Result').innerHTML.substring(0, document.getElementById('Result').innerHTML.length - 1);
+        }
+            function trocarSinal() {
+            let valor = Number(document.getElementById('Result').innerHTML);
+
+            if (valor !== 0) {
+            document.getElementById('Result').innerHTML = valor * -1;
+        }
+        }
+        function calcular() {
+    let resultado = document.getElementById("Result");
+    let conta = resultado.innerHTML;
+
+    conta = conta.replace(/,/g, ".");
+
+    try {
+        let valor = eval(conta);
+        resultado.innerHTML = valor.toString().replace(".", ",");
+    } catch {
+        resultado.innerHTML = "Erro";
+    }
+}
+        const glow = document.getElementById('mouseGlow');
+        document.addEventListener('mousemove', (e) => {
+            if (!glow) return;
+            glow.style.left = `${e.clientX}px`;
+            glow.style.top = `${e.clientY}px`;
+        });
+
+        // Fade in do título ao rolar
+        const title = document.querySelector('.title');
+        if (title) {
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    for (const entry of entries) {
+                        if (entry.isIntersecting) {
+                            title.classList.add('is-visible');
+                            observer.disconnect();
+                        }
+                    }
+                },
+                { threshold: 0.2 }
+            );
+            observer.observe(title);
+        }
+        (function() {
+    const canvas = document.getElementById('starCanvas');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+
+    function resize() {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    function createStars(n) {
+        stars = [];
+        for (let i = 0; i < n; i++) {
+            stars.push({
+                x:        Math.random() * canvas.width,
+                y:        Math.random() * canvas.height,
+                r:        Math.random() * 1.5 + 0.3,
+                baseAlpha: Math.random() * 0.55 + 0.1,
+                // piscar
+                blinkSpeed: Math.random() * 0.009 + 0.003,
+                blinkPhase: Math.random() * Math.PI * 2,
+                // movimento suave (deriva)
+                vx: (Math.random() - 0.5) * 0.18,
+                vy: (Math.random() - 0.5) * 0.18,
+                // paralaxe leve com o mouse
+                depth: Math.random() * 0.6 + 0.2,
+                isGold: Math.random() < 0.08
+            });
+        }
+    }
+
+    let frame = 0;
+    let mx = 0, my = 0;
+
+    document.addEventListener('mousemove', e => {
+        mx = (e.clientX / window.innerWidth  - 0.5) * 2;
+        my = (e.clientY / window.innerHeight - 0.5) * 2;
+    });
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        frame++;
+
+        for (const s of stars) {
+            // deriva contínua
+            s.x += s.vx;
+            s.y += s.vy;
+
+            // wrap ao sair da tela
+            if (s.x < -2) s.x = canvas.width  + 2;
+            if (s.x > canvas.width  + 2) s.x = -2;
+            if (s.y < -2) s.y = canvas.height + 2;
+            if (s.y > canvas.height + 2) s.y = -2;
+
+            // paralaxe com mouse (quanto maior depth, menos se move)
+            const px = s.x + mx * s.depth * 12;
+            const py = s.y + my * s.depth * 12;
+
+            // piscar
+            const alpha = s.baseAlpha *
+                (0.45 + 0.55 * Math.sin(s.blinkPhase + frame * s.blinkSpeed));
+
+            ctx.beginPath();
+            ctx.arc(px, py, s.r, 0, Math.PI * 2);
+            ctx.fillStyle = s.isGold
+                ? `rgba(255, 217, 0, ${alpha})`
+                : `rgba(255, 255, 255, ${alpha})`;
+            ctx.fill();
+        }
+
+        requestAnimationFrame(draw);
+    }
+
+    resize();
+    createStars(240);
+    draw();
+
+    window.addEventListener('resize', () => { resize(); createStars(240); });
+})();
+    </script>
+</body>
+
+</html>
+
