@@ -1,162 +1,162 @@
-/* Reset */
 .body {
-    margin: 0;
-    padding: 0;
-    font-family: 'JetBrains Mono', monospace;
-    color: white;
-    /* fundo unificado que cobre tudo */
-    background: linear-gradient(160deg, #0a0a0a 0%, #1a1800 50%, #0a0a0a 100%);
-    min-height: 100vh;
-    position: relative;
+  margin: 0;
+  padding: 0;
+  font-family: "JetBrains Mono", monospace;
+  color: white;
+  /* fundo unificado que cobre tudo */
+  background: linear-gradient(160deg, #0a0a0a 0%, #1a1800 50%, #0a0a0a 100%);
+  min-height: 100vh;
+  position: relative;
 }
 
-/* Canvas de estrelas — cobre toda a página */
 #starCanvas {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
 }
 
-/* Seção hero */
 .background {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    position: relative;
-    z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
 }
 
-/* Título */
 .title {
-    margin: 0;
-    font-size: 64px;
-    letter-spacing: 6px;
-    font-weight: 700;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 800ms ease, transform 800ms ease;
+  margin: 0;
+  font-size: 64px;
+  letter-spacing: 6px;
+  font-weight: 700;
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 800ms ease,
+    transform 800ms ease;
 }
 
 .title.is-visible {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .title .pro {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .title .calc {
-    color: #FFD900;
-    text-shadow: 0 0 30px rgba(255, 217, 0, 0.4);
+  color: #ffd900;
+  text-shadow: 0 0 30px rgba(255, 217, 0, 0.4);
 }
 
-/* Calculadora */
 .Calculator {
-    position: relative;
-    z-index: 1;
-    width: min(320px, 92vw);
-    margin: 0 auto;
-    margin-top: 60px;
-    margin-bottom: 80px;
-    background: rgba(15, 15, 15, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 16px;
-    border-radius: 14px;
-    box-shadow: 0 0 40px rgba(0,0,0,0.6), 0 0 1px rgba(255,217,0,0.15);
-    text-align: center;
-    color: white;
-    backdrop-filter: blur(8px);
+  position: relative;
+  z-index: 1;
+  width: min(320px, 92vw);
+  margin: 0 auto;
+  margin-top: 60px;
+  margin-bottom: 80px;
+  background: rgba(15, 15, 15, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 16px;
+  border-radius: 14px;
+  box-shadow:
+    0 0 40px rgba(0, 0, 0, 0.6),
+    0 0 1px rgba(255, 217, 0, 0.15);
+  text-align: center;
+  color: white;
+  backdrop-filter: blur(8px);
 }
 
-/* Display */
 #Result {
-    width: 100%;
-    height: 52px;
-    margin: 0 0 14px 0;
-    font-size: 26px;
-    border: none;
-    border-radius: 8px;
-    background-color: rgb(22, 22, 22);
-    color: white;
-    text-align: right;
-    padding-right: 12px;
-    line-height: 52px;
-    box-sizing: border-box;
-    font-family: 'JetBrains Mono', monospace;
+  width: 100%;
+  height: 52px;
+  margin: 0 0 14px 0;
+  font-size: 26px;
+  border: none;
+  border-radius: 8px;
+  background-color: rgb(22, 22, 22);
+  color: white;
+  text-align: right;
+  padding-right: 12px;
+  line-height: 52px;
+  box-sizing: border-box;
+  font-family: "JetBrains Mono", monospace;
 }
 
-/* Botões */
 .button {
-    width: 52px;
-    height: 52px;
-    margin: 3px;
-    font-size: 17px;
-    border: none;
-    border-radius: 8px;
-    background-color: rgb(30, 30, 30);
-    color: white;
-    cursor: pointer;
-    font-family: 'JetBrains Mono', monospace;
-    transition: background 120ms ease, color 120ms ease, transform 80ms ease;
+  width: 52px;
+  height: 52px;
+  margin: 3px;
+  font-size: 17px;
+  border: none;
+  border-radius: 8px;
+  background-color: rgb(30, 30, 30);
+  color: white;
+  cursor: pointer;
+  font-family: "JetBrains Mono", monospace;
+  transition:
+    background 120ms ease,
+    color 120ms ease,
+    transform 80ms ease;
 }
 
 .button:hover {
-    background-color: #FFD900;
-    color: #000;
-    transform: scale(1.07);
+  background-color: #ffd900;
+  color: #000;
+  transform: scale(1.07);
 }
 
 .button:active {
-    transform: scale(0.95);
+  transform: scale(0.95);
 }
 
-/* Mouse glow */
 #mouseGlow {
-    position: fixed;
-    width: 900px;
-    height: 900px;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-    background: radial-gradient(
-        circle at center,
-        rgba(255, 217, 0, 0.28) 0%,
-        rgba(255, 217, 0, 0.1) 35%,
-        transparent 65%
-    );
-    filter: blur(8px);
-    opacity: 0;
-    transition: opacity 200ms ease;
+  position: fixed;
+  width: 900px;
+  height: 900px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 217, 0, 0.28) 0%,
+    rgba(255, 217, 0, 0.1) 35%,
+    transparent 65%
+  );
+  filter: blur(8px);
+  opacity: 0;
+  transition: opacity 200ms ease;
 }
 
 body:hover #mouseGlow {
-    opacity: 1;
+  opacity: 1;
 }
 .made-by {
-    margin: 10px 0 0 0;
-    font-size: 13px;
-    letter-spacing: 2px;
-    color: rgba(255, 255, 255, 0.35);
-    font-family: 'JetBrains Mono', monospace;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 900ms ease 300ms, transform 900ms ease 300ms;
+  margin: 10px 0 0 0;
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.35);
+  font-family: "JetBrains Mono", monospace;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 900ms ease 300ms,
+    transform 900ms ease 300ms;
 }
 
-/* aparece junto com o título */
 .title.is-visible ~ .made-by {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .made-by span {
-    color: #FFD900;
-    opacity: 0.75;
+  color: #ffd900;
+  opacity: 0.75;
 }
