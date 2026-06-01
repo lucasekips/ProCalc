@@ -1,3 +1,6 @@
+<img width="1365" height="767" alt="3" src="https://github.com/user-attachments/assets/22773d57-f8ab-4fb8-853b-d730d3c6d306" />
+<img width="1353" height="767" alt="2" src="https://github.com/user-attachments/assets/a2fa2688-a651-4ec6-81ea-cfcfa268bf71" />
+<img width="1345" height="767" alt="1" src="https://github.com/user-attachments/assets/f0181ae9-84f2-465c-9707-00495d40612a" />
 # Procalc
 
 Procalc é uma calculadora web minimalista com identidade visual própria, fundo escuro com estrelas animadas, efeito de paralaxe ao mover o mouse, título com fade-in e uma paleta dourada que faz você querer deixar a aba aberta só pra ver bonito.
